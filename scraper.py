@@ -20,5 +20,6 @@ zipfile = ZipFile(StringIO(url.read()))
 
 
 reader = unicode_csv_reader(zipfile.open("full_tables/institutes.csv"))
+next(reader, None)  # skip the headers
 for row in reader:
   scraperwiki.sqlite.save(unique_keys=['grid_id'], data={"grid_id": row[0], "name": row[1], "wikipedia_url": row[2], "email_address": row[3], "established":row[4]})
